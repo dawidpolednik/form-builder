@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import styles from "./RenderButton.module.scss";
+import DefaultForm from "../DefaultForm/DefaultForm";
 
-class RenderButton extends Component {
-  render() {
-    return <button className={styles.renderButton}>Generate</button>;
-  }
-}
+type RenderButtonProps = {
+  handleButton: () => {};
+};
+
+const RenderButton = ({ handleButton }: RenderButtonProps) => {
+  // console.log("isRender :", isRender);
+  return (
+    <button className={styles.renderButton} onClick={handleButton}>
+      Generate
+    </button>
+  );
+};
+
 export default RenderButton;

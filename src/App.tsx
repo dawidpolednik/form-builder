@@ -8,7 +8,7 @@ interface IApp {
   isLoading: Boolean;
 }
 
-class App extends Component<{}, IApp> {
+class App extends Component<any, IApp> {
   state = {
     isRender: false,
     isLoading: false
@@ -27,11 +27,7 @@ class App extends Component<{}, IApp> {
   // }
 
   handleRenderButton = () =>
-    this.setState(prevState => ({ isRender: !prevState.isRender } as AppState));
-
-  // deleteForm = () =>(
-  //   this.setState
-  // )
+    this.setState(prevState => ({ isRender: !prevState.isRender }));
 
   render() {
     const { isRender } = this.state;

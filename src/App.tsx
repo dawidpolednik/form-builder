@@ -3,7 +3,7 @@ import styles from "./App.module.scss";
 import RenderButton from "./Components/RenderButton/RenderButton";
 import DefaultForm from "./Components/DefaultForm/DefaultForm";
 
-type AppState = { isRender: boolean };
+type AppState = { isRender: Boolean };
 
 class App extends Component<{}, AppState> {
   state = {
@@ -11,7 +11,11 @@ class App extends Component<{}, AppState> {
   };
 
   handleRenderButton = () =>
-    this.setState(prevState => ({ isRender: !prevState.isRender }));
+    this.setState(prevState => ({ isRender: !prevState.isRender } as AppState));
+
+  // deleteForm = () =>(
+  //   this.setState
+  // )
 
   render() {
     const { isRender } = this.state;
@@ -19,7 +23,7 @@ class App extends Component<{}, AppState> {
       <div className="App">
         <section className={styles.container}>
           <RenderButton handleButton={this.handleRenderButton} />
-          {isRender && <DefaultForm />}
+          {isRender && <DefaultForm deleteForm={this.handleRenderButton} />}
         </section>
       </div>
     );

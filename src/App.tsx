@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styles from "./App.module.scss";
 import RenderButton from "./Components/RenderButton/RenderButton";
 import DefaultForm from "./Components/DefaultForm/DefaultForm";
+import FormList from "./Components/FormList/FormList";
+import { AppProvider } from "./context/App.contest";
 
 interface IApp {
   isRender: Boolean;
@@ -30,14 +32,15 @@ class App extends Component<any, IApp> {
     this.setState(prevState => ({ isRender: !prevState.isRender }));
 
   render() {
-    const { isRender } = this.state;
     return (
-      <div className="App">
-        <section className={styles.container}>
-          <RenderButton handleButton={this.handleRenderButton} />
-          {isRender && <DefaultForm disableForm={this.handleRenderButton} />}
-        </section>
-      </div>
+      <AppProvider>
+        <div className="App">
+          <section className={styles.container}>
+            <RenderButton />
+            <FormList />
+          </section>
+        </div>
+      </AppProvider>
     );
   }
 }

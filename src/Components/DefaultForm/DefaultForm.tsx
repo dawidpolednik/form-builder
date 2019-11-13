@@ -11,11 +11,11 @@ interface IDefaultForm {
   isSelectList: Boolean;
 }
 
-type DefaultFormProps = {
-  disableForm: () => void;
-};
+// type DefaultFormProps = {
+//   disableForm: () => void;
+// };
 
-class DefaultForm extends Component<any, IDefaultForm, DefaultFormProps> {
+class DefaultForm extends Component<any, IDefaultForm> {
   state = {
     type: "",
     isEquals: false,

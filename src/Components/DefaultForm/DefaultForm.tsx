@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./DefaultForm.module.scss";
 import Input from "../Input/Input";
+import { AppConsumer, IApp } from "../../context/App.contest";
 
 interface IDefaultForm {
   type: String | Number | Boolean;
@@ -10,10 +11,6 @@ interface IDefaultForm {
   isLess: Boolean;
   isSelectList: Boolean;
 }
-
-// type DefaultFormProps = {
-//   disableForm: () => void;
-// };
 
 class DefaultForm extends Component<any, IDefaultForm> {
   state = {
@@ -26,10 +23,14 @@ class DefaultForm extends Component<any, IDefaultForm> {
   };
 
   renderButtons = (
-    <div className={styles.buttonsContainer}>
-      <button type="button">Add Sub-Input</button>
-      <button onClick={this.props.disableForm}>Delete</button>
-    </div>
+    <AppConsumer>
+      {(ctx: IApp) => (
+        <div className={styles.buttonsContainer}>
+          <button type="button">Add Sub-Input</button>
+          <button onClick={ctx.actions.handleRenderButton}>Delete</button>
+        </div>
+      )}
+    </AppConsumer>
   );
 
   renderForm = (

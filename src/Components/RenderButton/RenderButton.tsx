@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./RenderButton.module.scss";
-import { AppConsumer, IApp } from "../../context/App.contest";
+import { AppConsumer, IApp } from "../../context/DefaultForm.context";
 
 // type RenderButtonProps = {
 //   handleButton: () => void;
 // };
 
-const RenderButton = ({}) => {
+const RenderButton = () => {
   return (
     <AppConsumer>
       {(ctx: IApp) => {

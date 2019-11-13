@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import styles from "./App.module.scss";
 import RenderButton from "./Components/RenderButton/RenderButton";
-import DefaultForm from "./Components/DefaultForm/DefaultForm";
+// import DefaultForm from "./Components/DefaultForm/DefaultForm";
 import FormList from "./Components/FormList/FormList";
-import { AppProvider } from "./context/App.contest";
+import { AppProvider } from "./context/DefaultForm.context";
 
 interface IApp {
   isRender: Boolean;

@@ -15,8 +15,7 @@ const renderSelectList = (
   <label>
     Type
     <select name="type">
-      <option>Yes</option>
-      <option>No</option>
+      <option>Yes / No</option>
     </select>
   </label>
 );

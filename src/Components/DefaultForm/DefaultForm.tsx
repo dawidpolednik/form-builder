@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./DefaultForm.module.scss";
 import Input from "../Input/Input";
-import { AppConsumer, IApp } from "../../context/App.contest";
+import { AppConsumer, IApp } from "../../context/DefaultForm.context";
 
 interface IDefaultForm {
   type: String | Number | Boolean;
@@ -26,14 +26,16 @@ class DefaultForm extends Component<any, IDefaultForm> {
     <AppConsumer>
       {(ctx: IApp) => (
         <div className={styles.buttonsContainer}>
-          <button type="button">Add Sub-Input</button>
+          <button type="button" onClick={ctx.actions.handleRenderForm}>
+            Add Sub-Input
+          </button>
           <button onClick={ctx.actions.handleRenderButton}>Delete</button>
         </div>
       )}
     </AppConsumer>
   );
 
-  renderForm = (
+  renderDefaultForm = (
     <form className={styles.defaultForm}>
       <Input />
       <Input isSelectList />
@@ -41,7 +43,7 @@ class DefaultForm extends Component<any, IDefaultForm> {
     </form>
   );
   render() {
-    return this.renderForm;
+    return this.renderDefaultForm;
   }
 }
 export default DefaultForm;

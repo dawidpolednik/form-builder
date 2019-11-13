@@ -1,13 +1,36 @@
 import React, { Component } from "react";
-import { AppConsumer, IApp } from "../../context/App.contest";
+import { AppConsumer, IApp } from "../../context/DefaultForm.context";
 import DefaultForm from "../DefaultForm/DefaultForm";
+import Form from "../Form/Form";
 
 class FormList extends Component {
+  renderInitialForm = () => (
+    <AppConsumer>
+      {(ctx: IApp) => ctx.state.isRender && <DefaultForm />}
+    </AppConsumer>
+  );
+  renderSingleForm = () => <Form />;
+
+  isRender = () => (
+    <AppConsumer>
+      {(ctx: IApp) =>
+        ctx.state.counter === 0 ? this.renderSingleForm() : this.isRender()
+      // this.renderSingleForm()
+      }
+    </AppConsumer>
+  );
+
+  renderForm = () => (
+    <AppConsumer>
+      {(ctx: IApp) => ctx.state.isRenderForm && this.isRender()}
+    </AppConsumer>
+  );
   render() {
     return (
-      <AppConsumer>
-        {(ctx: IApp) => ctx.state.isRender && <DefaultForm />}
-      </AppConsumer>
+      <>
+        {this.renderInitialForm()}
+        {this.renderForm()}
+      </>
     );
   }
 }

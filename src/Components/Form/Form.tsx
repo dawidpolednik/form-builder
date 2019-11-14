@@ -6,6 +6,8 @@ import Input from "../Input/Input";
 interface IForm {
   renderCondition: () => void;
   renderForm: () => void;
+  renderSubForm: () => void;
+  isRenderSubForm: boolean;
 }
 
 class Form extends Component<{}, IForm> {
@@ -30,7 +32,7 @@ class Form extends Component<{}, IForm> {
     <AppConsumer>
       {(ctx: IApp) => (
         <div className={styles.buttonsContainer}>
-          <button type="button">Add Sub-Input</button>
+          <button type="submit">Add Sub-Input</button>
           <button onClick={ctx.actions.handleRenderForm}>Delete</button>
         </div>
       )}
@@ -38,24 +40,34 @@ class Form extends Component<{}, IForm> {
   );
 
   renderSingleForm = () => (
-    <form className={styles.form}>
-      {this.renderCondition()}
-      {this.renderAnswer()}
-      <Input />
-      <Input isSelectList />
-      {this.renderButtons}
-    </form>
+    <AppConsumer>
+      {(ctx: IApp) => (
+        <form
+          className={styles.form}
+          onSubmit={e => {
+            e.preventDefault();
+            ctx.actions.handleRenderSubForm();
+          }}
+        >
+          {this.renderCondition()}
+          {this.renderAnswer()}
+          <Input />
+          <Input isSelectList />
+          {this.renderButtons}
+        </form>
+      )}
+    </AppConsumer>
   );
-  //   renderForm = () => (
-  //     <AppConsumer>
-  //       {(ctx: IApp) =>
-  //         ctx.state.counter === 1 ? this.renderSingleForm() : this.renderForm()
-  //       }
-  //     </AppConsumer>
-  //   );
 
   render() {
-    return this.renderSingleForm();
+    return (
+      <>
+        {this.renderSingleForm()}
+        <AppConsumer>
+          {(ctx: IApp) => ctx.state.counter === 2 && this.renderSingleForm()}
+        </AppConsumer>
+      </>
+    );
   }
 }
 export default Form;

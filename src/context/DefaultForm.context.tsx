@@ -9,11 +9,13 @@ interface IState {
   isRender: boolean;
   isRenderForm: boolean;
   counter: number;
+  isRenderSubForm: boolean;
 }
 
 interface IActions {
   handleRenderButton: () => void;
   handleRenderForm: () => void;
+  handleRenderSubForm: () => void;
 }
 
 const ctxt = createContext<any>(null);
@@ -24,11 +26,13 @@ class AppProvider extends Component<{}, IState> {
   state: IState = {
     isRender: false,
     isRenderForm: false,
-    counter: 0
+    counter: 0,
+    isRenderSubForm: false
   };
 
   handleRenderButton = () =>
     this.setState(prevState => ({ isRender: !prevState.isRender }));
+
   handleRenderForm = () => {
     this.setState(
       prevState => ({
@@ -37,7 +41,17 @@ class AppProvider extends Component<{}, IState> {
       }),
       () => console.log("this.state.counter :", this.state.counter)
     );
-    console.log("this.state.counter :", this.state.counter);
+  };
+
+  handleRenderSubForm = () => {
+    this.setState(
+      prevState => ({
+        counter: prevState.counter + 1
+      }),
+      () => {
+        console.log("this.state.counter :", this.state.counter);
+      }
+    );
   };
 
   render() {
@@ -48,7 +62,8 @@ class AppProvider extends Component<{}, IState> {
           state: this.state,
           actions: {
             handleRenderButton: this.handleRenderButton,
-            handleRenderForm: this.handleRenderForm
+            handleRenderForm: this.handleRenderForm,
+            handleRenderSubForm: this.handleRenderSubForm
           }
         }}
       >

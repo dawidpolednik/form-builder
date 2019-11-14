@@ -12,12 +12,7 @@ class FormList extends Component {
   renderSingleForm = () => <Form />;
 
   isRender = () => (
-    <AppConsumer>
-      {(ctx: IApp) =>
-        ctx.state.counter === 0 ? this.renderSingleForm() : this.isRender()
-      // this.renderSingleForm()
-      }
-    </AppConsumer>
+    <AppConsumer>{(ctx: IApp) => this.renderSingleForm()}</AppConsumer>
   );
 
   renderForm = () => (

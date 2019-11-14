@@ -9,8 +9,23 @@ interface IForm {
   renderSubForm: () => void;
   isRenderSubForm: boolean;
 }
+type IState = {
+  counter: number;
+};
+class Form extends Component<any, IState> {
+  state = {
+    counter: 0
+  };
+  componentDidUpdate(prevProps: IForm, prevState: IState) {
+    console.log("prevState.counter :", prevState.counter);
+    console.log("this.state.counter :", this.state.counter);
+    prevState.counter < this.state.counter && this.renderSingleForm();
+  }
 
-class Form extends Component<{}, IForm> {
+  handleRenderSubForm = () => {
+    this.setState(prevState => ({ counter: prevState.counter + 1 }));
+  };
+
   renderCondition = () => (
     <label>
       Condition
@@ -46,7 +61,7 @@ class Form extends Component<{}, IForm> {
           className={styles.form}
           onSubmit={e => {
             e.preventDefault();
-            ctx.actions.handleRenderSubForm();
+            this.handleRenderSubForm();
           }}
         >
           {this.renderCondition()}
@@ -60,14 +75,7 @@ class Form extends Component<{}, IForm> {
   );
 
   render() {
-    return (
-      <>
-        {this.renderSingleForm()}
-        <AppConsumer>
-          {(ctx: IApp) => ctx.state.counter === 2 && this.renderSingleForm()}
-        </AppConsumer>
-      </>
-    );
+    return this.renderSingleForm();
   }
 }
 export default Form;

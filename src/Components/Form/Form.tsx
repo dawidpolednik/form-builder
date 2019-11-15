@@ -16,10 +16,10 @@ class Form extends Component<any, IState> {
   state = {
     counter: 0
   };
-  componentDidUpdate(prevProps: IForm, prevState: IState) {
+  componentDidUpdate(prevProps: IApp, prevState: IState) {
     console.log("prevState.counter :", prevState.counter);
     console.log("this.state.counter :", this.state.counter);
-    prevState.counter < this.state.counter && this.renderSingleForm();
+    prevState.counter !== this.state.counter && this.renderSingleForm();
   }
 
   handleRenderSubForm = () => {
@@ -55,23 +55,19 @@ class Form extends Component<any, IState> {
   );
 
   renderSingleForm = () => (
-    <AppConsumer>
-      {(ctx: IApp) => (
-        <form
-          className={styles.form}
-          onSubmit={e => {
-            e.preventDefault();
-            this.handleRenderSubForm();
-          }}
-        >
-          {this.renderCondition()}
-          {this.renderAnswer()}
-          <Input />
-          <Input isSelectList />
-          {this.renderButtons}
-        </form>
-      )}
-    </AppConsumer>
+    <form
+      className={styles.form}
+      onSubmit={e => {
+        e.preventDefault();
+        this.handleRenderSubForm();
+      }}
+    >
+      {this.renderCondition()}
+      {this.renderAnswer()}
+      <Input />
+      <Input isSelectList />
+      {this.renderButtons}
+    </form>
   );
 
   render() {

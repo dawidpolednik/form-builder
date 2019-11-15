@@ -9,23 +9,18 @@ class FormList extends Component {
       {(ctx: IApp) => ctx.state.isRender && <DefaultForm />}
     </AppConsumer>
   );
-  renderSingleForm = () => <Form />;
-
-  isRender = () => (
-    <AppConsumer>{(ctx: IApp) => this.renderSingleForm()}</AppConsumer>
-  );
 
   renderForm = () => (
     <AppConsumer>
-      {(ctx: IApp) => ctx.state.isRenderForm && this.isRender()}
+      {(ctx: IApp) => ctx.state.isRenderForm && <Form />}
     </AppConsumer>
   );
   render() {
     return (
-      <>
+      <React.Fragment>
         {this.renderInitialForm()}
         {this.renderForm()}
-      </>
+      </React.Fragment>
     );
   }
 }

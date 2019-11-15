@@ -5,9 +5,23 @@ export interface IApp {
   actions: IActions;
 }
 
+enum Conditions {
+  equals = "Equals",
+  greaterThan = "Greater Than",
+  lessThan = "Less Than"
+}
+
+interface IInput {
+  type: string | number | boolean;
+  condition?: Conditions;
+  inputValue: string;
+  children: IInput[];
+}
+
 interface IState {
   isRender: boolean;
   isRenderForm: boolean;
+  form: IInput[];
 }
 
 interface IActions {
@@ -22,7 +36,8 @@ const AppContext = ctxt.Provider;
 class AppProvider extends Component<{}, IState> {
   state: IState = {
     isRender: false,
-    isRenderForm: false
+    isRenderForm: false,
+    form: []
   };
 
   handleRenderButton = () =>

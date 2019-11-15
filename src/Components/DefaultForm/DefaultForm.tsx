@@ -10,6 +10,7 @@ interface IDefaultForm {
   isGreater: Boolean;
   isLess: Boolean;
   isSelectList: Boolean;
+  children: any[];
 }
 
 class DefaultForm extends Component<any, IDefaultForm> {
@@ -19,7 +20,8 @@ class DefaultForm extends Component<any, IDefaultForm> {
     isSelected: false,
     isGreater: false,
     isLess: false,
-    isSelectList: true
+    isSelectList: true,
+    children: []
   };
 
   renderButtons = (

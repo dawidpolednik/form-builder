@@ -3,25 +3,44 @@ import styles from "./DefaultForm.module.scss";
 import Input from "../Input/Input";
 import { AppConsumer, IApp } from "../../context/DefaultForm.context";
 
-interface IDefaultForm {
-  type: String | Number | Boolean;
-  isEquals: Boolean;
-  isSelected: Boolean;
-  isGreater: Boolean;
-  isLess: Boolean;
-  isSelectList: Boolean;
+export interface IDefaultForm {
+  state: IDefaultFormState;
+  actions: IDefaultFormActions;
+}
+
+export interface IDefaultFormState {
+  isSelectList?: Boolean;
+  type: String;
+  question: String;
   children: any[];
 }
 
-class DefaultForm extends Component<any, IDefaultForm> {
+interface IDefaultFormActions {
+  handleChangeType: () => void;
+  handleChangeQuestion: () => void;
+}
+
+class DefaultForm extends Component<any, IDefaultFormState> {
   state = {
-    type: "",
-    isEquals: false,
-    isSelected: false,
-    isGreater: false,
-    isLess: false,
-    isSelectList: true,
+    type: "yes",
+    question: "",
     children: []
+  };
+
+  handleChangeType = (e: React.ChangeEvent<HTMLSelectElement>): any => {
+    e.preventDefault();
+    return this.setState({
+      ...this.state,
+      type: e.target.value
+    });
+  };
+
+  handleChangeQuestion = (e: React.ChangeEvent<HTMLInputElement>): any => {
+    e.preventDefault();
+    return this.setState({
+      ...this.state,
+      question: e.target.value
+    });
   };
 
   renderButtons = (
@@ -39,11 +58,19 @@ class DefaultForm extends Component<any, IDefaultForm> {
 
   renderDefaultForm = (
     <form className={styles.defaultForm}>
-      <Input />
-      <Input isSelectList />
+      {/* <Input
+        question={this.state.question}
+        handleChangeQuestion={this.handleChangeQuestion}
+      />
+      <Input
+        isSelectList
+        type={this.state.type}
+        handleChangeType={this.handleChangeType}
+      /> */}
       {this.renderButtons}
     </form>
   );
+
   render() {
     return this.renderDefaultForm;
   }

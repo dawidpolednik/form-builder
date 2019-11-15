@@ -1,17 +1,28 @@
 import React from "react";
 import styles from "./Input.module.scss";
+import { AppConsumer, IApp } from "../../context/DefaultForm.context";
+import { IDefaultFormState } from "../DefaultForm/DefaultForm";
 
-type InputProps = {
-  isSelectList?: Boolean;
-};
+// enum Type {
+//   yes = "yes",
+//   no = "no"
+// }
 
-const renderInput = (
+// type InputProps = {
+//   isSelectList?: Boolean;
+//   type: String;
+//   question: String;
+//   handleChangeQuestion: any;
+//   handleChangeType: any;
+// };
+
+const renderInput: any = (
   <label>
     Question<input className={styles.input} type="text"></input>
   </label>
 );
 
-const renderSelectList = (
+const renderSelectList: any = (
   <label>
     Type
     <select name="type">
@@ -20,7 +31,7 @@ const renderSelectList = (
   </label>
 );
 
-const Input = ({ isSelectList }: InputProps) => {
+const Input = ({ isSelectList }: IDefaultFormState) => {
   return !isSelectList ? renderInput : renderSelectList;
 };
 export default Input;

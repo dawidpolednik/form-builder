@@ -64,8 +64,8 @@ class Form extends Component<any, IState> {
     >
       {this.renderCondition()}
       {this.renderAnswer()}
-      <Input />
-      <Input isSelectList />
+      {/* <Input />
+      <Input isSelectList /> */}
       {this.renderButtons}
     </form>
   );

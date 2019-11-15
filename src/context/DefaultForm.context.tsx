@@ -14,7 +14,7 @@ enum Conditions {
 interface IInput {
   type: string | number | boolean;
   condition?: Conditions;
-  inputValue: string;
+  question: string;
   children: IInput[];
 }
 
